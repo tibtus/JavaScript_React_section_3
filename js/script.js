@@ -104,4 +104,39 @@ window.addEventListener('DOMContentLoaded', () => {
 
     setClock('.timer', deadline);
 
+
+    // Modal
+
+    const modalOpenBlock = document.querySelectorAll('button[data-modal]');
+    const modalCloseBLock = document.querySelectorAll('[data-close]');
+    const modal = document.querySelector('.modal');
+   
+
+    modalOpenBlock.forEach(item => {
+        item.addEventListener('click', (event) => {
+            if (event.target && event.target.tagName == "BUTTON") {
+               modal.style.display = 'block';
+            } else {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+    modalCloseBLock.forEach(item => {
+        item.addEventListener('click', (event) => {
+            if (event.target && event.target.tagName == "DIV") {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        });
+    });
+
+
+
+    console.log(modalOpenBlock);
+    console.log(modalCloseBLock);
+    console.log(modal);
+
+
 }); 
