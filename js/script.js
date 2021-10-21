@@ -107,36 +107,41 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Modal
 
-    const modalOpenBlock = document.querySelectorAll('button[data-modal]');
-    const modalCloseBLock = document.querySelectorAll('[data-close]');
-    const modal = document.querySelector('.modal');
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal'),
+          modalCloseBtn = document.querySelector('[data-close]');
+          
    
 
-    modalOpenBlock.forEach(item => {
-        item.addEventListener('click', (event) => {
-            if (event.target && event.target.tagName == "BUTTON") {
-               modal.style.display = 'block';
-            } else {
-                modal.style.display = 'none';
-            }
+    modalTrigger.forEach(btn => {
+        btn.addEventListener('click', () => {
+               modal.classList.add('show');
+               modal.classList.remove('hide');
+               document.body.style.overflow = 'hidden';
+
         });
     });
 
-    modalCloseBLock.forEach(item => {
-        item.addEventListener('click', (event) => {
-            if (event.target && event.target.tagName == "DIV") {
-                modal.style.display = 'none';
-            } else {
-                modal.style.display = 'block';
-            }
-        });
+    function closeModal() {
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';    }
+
+    
+    modalCloseBtn.addEventListener('click', closeModal);
+    
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
     });
 
-
-
-    console.log(modalOpenBlock);
-    console.log(modalCloseBLock);
-    console.log(modal);
+    document.addEventListener('keydown', (e) => {
+        if (e.code === "Escape" && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
 
 
 }); 
