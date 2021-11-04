@@ -323,82 +323,53 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     //Slider
-
-    const sliderArrow = document.querySelector('.offer__slider-counter');
-    const sliderContent = document.querySelectorAll('.offer__slide');
-    let currentIndex = document.querySelector('#current');
-    let totalIndex = document.querySelector('#total'); 
-
-    let sliderIndex = 0;
-    let sliderNumber = sliderContent.length - 1; 
     
+    const slides = document.querySelectorAll('.offer__slide'),
+            prev = document.querySelector('.offer__slider-prev'),
+            next = document.querySelector('.offer__slider-next'),
+            total = document.querySelector('#total'),
+            current = document.querySelector('#current');
+    let slideIndex = 1;
+
+    showSlides(slideIndex);
+
+    if(slides.length < 10) {
+        total.textContent = `0${slides.length}`;
+    } else {
+        total.textContent = slides.length;
+    }
+
+    function showSlides (n) {
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+
+        slides.forEach(item => item.style.display = 'none');
+
+        slides[slideIndex - 1].style.display = 'block';
+
+        if(slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+        } else {
+            current.textContent = slideIndex;
+        }
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
     
-    function sliderUpIndex () { 
-        if (sliderIndex < 10) {
-            currentIndex.innerHTML = `
-            ${'0' + (sliderIndex + 1) }             
-            `; 
-            totalIndex.innerHTML = `
-            ${'0' + (sliderNumber + 1) }             
-            `; 
-        } else {
-            currentIndex.innerHTML = `
-            ${sliderIndex + 1}             
-            `; 
-            totalIndex.innerHTML = `
-            ${sliderNumber + 1}             
-            `; 
-
-        }    
-       
-    }
-
-    sliderUpIndex();
-
-
-    function hideSliderContent () {
-        sliderContent.forEach(item => {
-            item.classList.add('hide');            
-        });
-    }
-
-    function showSliderContent (i) {
-        sliderContent[i].classList.add('show');
-        sliderContent[i].classList.remove('hide');      
-    }
-
-    hideSliderContent();
-    showSliderContent(sliderIndex);    
-   
-
-    sliderArrow.addEventListener('click', (event) => {        
-        if(event.target && event.target.classList.contains('offer__slider-prev')){
-            if (sliderIndex === 0) {
-                sliderIndex = sliderNumber;
-            } else {
-                --sliderIndex;
-            }
-            sliderUpIndex();
-            hideSliderContent();
-            showSliderContent(sliderIndex);  
-
-
-        } else if (event.target.classList.contains('offer__slider-next')){
-            if (sliderIndex === sliderNumber){
-                sliderIndex = 0;
-            } else {
-                ++sliderIndex;
-            }            
-            sliderUpIndex();
-            hideSliderContent();
-            showSliderContent(sliderIndex);  
-
-
-        } else {
-            console.log('Ошибка в sliderArrow');
-
-        }       
+    prev.addEventListener('click', () => {
+        plusSlides(-1);
     });
+    next.addEventListener('click', () => {
+        plusSlides(1);
+    });
+   
 
 
 
