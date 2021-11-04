@@ -322,6 +322,89 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    //Slider
+
+    const sliderArrow = document.querySelector('.offer__slider-counter');
+    const sliderContent = document.querySelectorAll('.offer__slide');
+    let currentIndex = document.querySelector('#current');
+    let totalIndex = document.querySelector('#total'); 
+
+    let sliderIndex = 0;
+    let sliderNumber = sliderContent.length - 1; 
+    
+    
+    function sliderUpIndex () { 
+        if (sliderIndex < 10) {
+            currentIndex.innerHTML = `
+            ${'0' + (sliderIndex + 1) }             
+            `; 
+            totalIndex.innerHTML = `
+            ${'0' + (sliderNumber + 1) }             
+            `; 
+        } else {
+            currentIndex.innerHTML = `
+            ${sliderIndex + 1}             
+            `; 
+            totalIndex.innerHTML = `
+            ${sliderNumber + 1}             
+            `; 
+
+        }    
+       
+    }
+
+    sliderUpIndex();
+
+
+    function hideSliderContent () {
+        sliderContent.forEach(item => {
+            item.classList.add('hide');            
+        });
+    }
+
+    function showSliderContent (i) {
+        sliderContent[i].classList.add('show');
+        sliderContent[i].classList.remove('hide');      
+    }
+
+    hideSliderContent();
+    showSliderContent(sliderIndex);    
+   
+
+    sliderArrow.addEventListener('click', (event) => {        
+        if(event.target && event.target.classList.contains('offer__slider-prev')){
+            if (sliderIndex === 0) {
+                sliderIndex = sliderNumber;
+            } else {
+                --sliderIndex;
+            }
+            sliderUpIndex();
+            hideSliderContent();
+            showSliderContent(sliderIndex);  
+
+
+        } else if (event.target.classList.contains('offer__slider-next')){
+            if (sliderIndex === sliderNumber){
+                sliderIndex = 0;
+            } else {
+                ++sliderIndex;
+            }            
+            sliderUpIndex();
+            hideSliderContent();
+            showSliderContent(sliderIndex);  
+
+
+        } else {
+            console.log('Ошибка в sliderArrow');
+
+        }       
+    });
+
+
+
+
+
+
 
 
 }); 
