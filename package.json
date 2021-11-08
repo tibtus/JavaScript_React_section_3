@@ -1,7 +1,7 @@
 {
   "name": "food",
   "version": "1.0.0",
-  "description": "",
+  "description": "JavaScript_React_section_3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,18 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "json-server": "^0.16.1"
-  }
+    "json-server": "^0.16.1",
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tibtus/JavaScript_React_section_3.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/tibtus/JavaScript_React_section_3/issues"
+  },
+  "homepage": "https://github.com/tibtus/JavaScript_React_section_3#readme"
 }
